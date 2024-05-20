@@ -27,7 +27,9 @@ server.post('/', async(req, res, next) =>
     const outFilePath = req.files.gpx.tempFilePath + '.jpg'
     fs.renameSync(req.files.gpx.tempFilePath, filePathWithExtension)
 
-    const application = new Application(['-i', filePathWithExtension, '-o', outFilePath]);
+    const applicationArguments = ['-i', filePathWithExtension, '-o', outFilePath]
+    applicationArguments.push(...process.argv.slice(2))
+    const application = new Application(applicationArguments);
     const exitCode = await application.run();
     if(exitCode === 0)
     {
