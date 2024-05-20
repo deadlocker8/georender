@@ -1,57 +1,28 @@
 # Georender
 
-Georender is a command line utility for rendering GPS data as image.
+Forked from https://github.com/loskoderos/georender.
 
-Application was created for server side rendering of GPX files for [GPXLAB - GPS Track Editor](https://gpxlab.net).
+The original Georender is a command line utility for rendering GPS data as image.
+The application was created for server side rendering of GPX files for [GPXLAB - GPS Track Editor](https://gpxlab.net).
 
-Following input data formats are supported:
-- GeoJSON
-- GPX
-- KML / KMZ
+This fork encapsulates the command line utility with a basic webserver that allows to upload a gpx file and return the generated image.
 
 ## Examples
 Following images are generated from GPX tracks from [TransEuroTrail](https://transeurotrail.org/) for Finland, Norway and Sweden.
 
-Render GPX on OpenStreetMap
+Use OpenStreetMap
 ![](samples/1.jpg)
-~~~
-./georender -w 1024 -h 1024 -i FIN.gpx -i N.gpx -i S.gpx -o samples/1.jpg -t osm
-~~~
-
-Render GPX on OpenTopoMap
+Use OpenTopoMap
 ![](samples/2.jpg)
-~~~
-./georender -w 1024 -h 1024 -i FIN.gpx -i N.gpx -i S.gpx -o samples/2.jpg -t otm
-~~~
-
-Render GPX on ESRI World Imagery
+Use ESRI World Imagery
 ![](samples/3.jpg)
-~~~
-./georender -w 1024 -h 1024 -i FIN.gpx -i N.gpx -i S.gpx -o samples/3.jpg -t esri
-~~~
-
-
-## How to use it?
-Checkout this repository and install dependencies with:
-~~~
-npm install
-~~~
-
-Render sample GPX file with Georender:
-~~~
-./georender -i samples/vesuvio.gpx -o out.png
-~~~
-
-You should get the following image:
-
-![](samples/vesuvio.png)
 
 ## How does it work?
 Georender is built with OpenLayers, server side rendering (SSR) is implemented with JSDom.
 Application creates a virtual DOM structure to allow OpenLayers render a map. The DOM is monkey patched for missing dependencies to make it work. Once completed the canvas is saved to the output image.
 
 ## Options
-Georender can be run with following options:
+The underlying Georender command line utility can be run with following options:
 - `-w, --width <px>` - Image width in pixels
 - `-h, --height <px>` - Image height in pixels
 - `-i, --in <input file>` - Path to input file (.geojson, .gpx, .kml, .kmz), supports multiple files
@@ -63,6 +34,7 @@ You can change default settings by editing `defaults.js`.
 
 ## Docker
 Georender can work in headless mode in Docker, however due to Canvas usage there are some extra dependencies that need to be installed, see Dockerfile.
+The docker image exposes port 3000.
 
 Build docker container:
 ~~~
@@ -71,8 +43,29 @@ docker build -t georender .
 
 Run Georender in docker:
 ~~~
-docker run -v ./:/local georender -i /local/samples/vesuvio.gpx -o /local/out.png
+docker run georender
 ~~~
+
+To specify options just append them as command line arguments after the image name:
+~~~
+docker run georender -w 800 -h 450 -t osm
+~~~
+
+## How to use
+Send a POST request to http://localhost:3000. Your request must include a gpx file attachment and the name of the input must be `gpx`. 
+The server will then render the image and return it in response.
+
+Basic HTML example:
+```html
+<html>
+    <body>
+        <form method="post" action="http://localhost:3000" encType="multipart/form-data">
+            <input type="file" name="gpx">
+            <button type="submit">Send</button>
+        </form>
+    </body>
+</html>
+```
 
 ## Notes
 - To install Georender on Mac M1 chip you may need to run the following command to install Canvas dependencies:
