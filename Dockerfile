@@ -1,8 +1,8 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 RUN apk update && apk upgrade --no-cache
 RUN apk add --no-cache \
-    bash \ 
+    bash \
     build-base \
     g++ \
     cairo-dev \
