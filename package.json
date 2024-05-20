@@ -11,8 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "canvas": "^2.11.2",
-    "jsdom": "^22.1.0",
+    "jsdom": "^24.0.0",
     "jszip": "^3.10.1",
-    "ol": "^8.1.0"
+    "ol": "^9.2.2"
   }
 }
