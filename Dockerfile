@@ -17,4 +17,6 @@ COPY package-lock.json /opt/georender/
 RUN npm install
 COPY . /opt/georender/
 
+EXPOSE 3000
+
 ENTRYPOINT [ "/opt/georender/georender" ]

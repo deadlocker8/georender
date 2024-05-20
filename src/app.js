@@ -47,7 +47,6 @@ export class Application {
           !args.values.out.toLowerCase().endsWith('.jpg') &&
           !args.values.out.toLowerCase().endsWith('.jpeg')) {
         throw new Error("Output file must be either .png or .jpg");
-        return -1;
       }
     } catch (err) {
       console.error(err.message);
