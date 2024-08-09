@@ -12,9 +12,9 @@
   "dependencies": {
     "canvas": "^2.11.2",
     "express": "^4.19.2",
-    "express-fileupload": "^1.5.0",
-    "jsdom": "^24.0.0",
+    "express-fileupload": "^1.5.1",
+    "jsdom": "^24.1.1",
     "jszip": "^3.10.1",
-    "ol": "^9.2.2"
+    "ol": "^10.0.0"
   }
 }
