@@ -9,7 +9,7 @@ export const defaults = {
   height: 500,
   tile: {
     osm: new OSM({
-      url: 'https://cdn.devgrid.net/osm/{z}/{x}/{y}.png',
+      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       crossOrigin: 'anonymous'
     }),
     otm: new XYZ({
