@@ -32,7 +32,7 @@ export class Renderer {
         element.style.height = `${height}px`;
         document.body.appendChild(element);
     
-        const map = new Map({ target: element });
+        const map = new Map({ target: element, keyboardEventTarget: element });
         map.addLayer(new TileLayer({ source: tile }));
     
         const featureSource = new VectorSource();
