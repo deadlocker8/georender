@@ -10,7 +10,7 @@
   "author": "Lukasz Cepowski <lukasz@cepowski.com> (https://loskoderos.com)",
   "license": "MIT",
   "dependencies": {
-    "canvas": "^3.1.0",
+    "canvas": "^3.2.0",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
     "jsdom": "^26.1.0",
